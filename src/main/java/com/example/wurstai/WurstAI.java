@@ -14,16 +14,13 @@ public class WurstAI implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        // Çat mesajlarını dinləyən event
         ServerMessageEvents.CHAT_MESSAGE.register((SignedMessage message, ServerPlayerEntity sender, net.minecraft.network.message.MessageType.Parameters params) -> {
             String msgContent = message.getContent().getString().toLowerCase(Locale.ROOT);
 
-            // Mesajın içində "wurstai" sözünün olub-olmadığını yoxlayırıq
             if (msgContent.contains("wurstai")) {
                 String response = generateAIResponse(msgContent, sender.getName().getString());
                 
                 if (response != null) {
-                    // Bütün oyunda olan oyunçulara wurstAI cavabını yaşıl rəngdə göndəririk
                     Text aiText = Text.literal("[wurstAI] " + response)
                             .formatted(Formatting.GREEN, Formatting.BOLD);
                     
@@ -35,9 +32,6 @@ public class WurstAI implements ModInitializer {
         });
     }
 
-    /**
-     * Mesajın məzmununa əsasən ingiliscə cavab generasiya edən funksiya
-     */
     private String generateAIResponse(String input, String playerName) {
         if (input.contains("salam") || input.contains("hello") || input.contains("hi") || input.contains("hey")) {
             return "Hello " + playerName + "! How can I assist you today?";
@@ -53,4 +47,5 @@ public class WurstAI implements ModInitializer {
             return "Hello " + playerName + "! I heard you mention my name. How is your Minecraft world?";
         }
     }
-          }
+                        }
+                        
